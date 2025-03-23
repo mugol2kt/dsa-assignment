@@ -1,0 +1,88 @@
+// Node class to represent each element in the linked list
+class Node {
+    int data;
+    Node next;
+
+    // Constructor to create a new node
+    public Node(int data) {
+        this.data = data;
+        this.next = null;
+    }
+}
+
+// Singly Linked List class
+public class LinkedList {
+    private Node head; // Head of the linked list
+
+    // Constructor to initialize an empty linked list
+    public LinkedList() {
+        this.head = null;
+    }
+
+    // Method to insert a node at the beginning of the list
+    public void insertAtBeginning(int data) {
+        Node newNode = new Node(data); // Create a new node
+        newNode.next = head; // Point the new node to the current head
+        head = newNode; // Update the head to the new node
+    }
+
+    // Method to insert a node at the end of the list
+    public void insertAtEnd(int data) {
+        Node newNode = new Node(data); // Create a new node
+
+        if (head == null) {
+            // If the list is empty, make the new node the head
+            head = newNode;
+        } else {
+            // Traverse to the last node
+            Node current = head;
+            while (current.next != null) {
+                current = current.next;
+            }
+            // Insert the new node at the end
+            current.next = newNode;
+        }
+    }
+
+    // Method to delete a node from the beginning of the list
+    public void deleteFromBeginning() {
+        if (head == null) {
+            System.out.println("List is empty. Nothing to delete.");
+        } else {
+            head = head.next; // Update the head to the next node
+        }
+    }
+
+    // Method to print the linked list
+    public void printList() {
+        Node current = head;
+        while (current != null) {
+            System.out.print(current.data + " -> ");
+            current = current.next;
+        }
+        System.out.println("null");
+    }
+
+    // Main method to test the implementation
+    public static void main(String[] args) {
+        LinkedList list = new LinkedList();
+
+        // Insert nodes at the beginning
+        list.insertAtBeginning(10);
+        list.insertAtBeginning(20);
+        list.insertAtBeginning(30);
+        System.out.println("List after inserting at the beginning:");
+        list.printList(); // Output: 30 -> 20 -> 10 -> null
+
+        // Insert nodes at the end
+        list.insertAtEnd(40);
+        list.insertAtEnd(50);
+        System.out.println("List after inserting at the end:");
+        list.printList(); // Output: 30 -> 20 -> 10 -> 40 -> 50 -> null
+
+        // Delete a node from the beginning
+        list.deleteFromBeginning();
+        System.out.println("List after deleting from the beginning:");
+        list.printList(); // Output: 20 -> 10 -> 40 -> 50 -> null
+    }
+}
